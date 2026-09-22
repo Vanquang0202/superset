@@ -17,30 +17,18 @@
  * under the License.
  */
 
-import { SupersetTheme } from '@apache-superset/core/ui';
-import { FeatureCollection, Point } from 'geojson';
-
-// Synthetic locations, with no bundled Mapbox credentials.
-export const generateData = (theme: SupersetTheme) => ({
-  bounds: [
-    [-122.43, 37.77],
-    [-122.41, 37.79],
+// Synthetic query records; authentication is supplied by the host application.
+export default {
+  data: [
+    {
+      contour: JSON.stringify([
+        [-122.43, 37.77],
+        [-122.41, 37.77],
+        [-122.41, 37.79],
+        [-122.43, 37.79],
+        [-122.43, 37.77],
+      ]),
+      population: 120,
+    },
   ],
-  geoJSON: {
-    type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: [-122.42, 37.78] },
-        properties: { metric: 12, radius: 10, color: theme.colorPrimary },
-      },
-      {
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: [-122.41, 37.79] },
-        properties: { metric: 8, radius: 10, color: theme.colorPrimary },
-      },
-    ],
-  } satisfies FeatureCollection<Point>,
-  hasCustomMetric: true,
-  mapboxApiKey: '',
-});
+};
